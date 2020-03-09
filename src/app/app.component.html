@@ -314,7 +314,15 @@
       </svg>
     </a>
 </div>
-
+<div class="content">
+  <h2>Test Data</h2>
+  <br>
+  <ul>
+    <li class="text" *ngFor="let item of items | async">
+      {{item.name}}
+    </li>
+  </ul>
+</div>
 <div class="content" role="main">
 
   <!-- Highlight Card -->
