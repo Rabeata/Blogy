@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { firestore } from 'firebase';
-import { map } from 'rxjs/operators';
-
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
+import { ProjectName, ProjectImage } from './config/project.config';
 
 @Component({
   selector: 'app-root',
@@ -11,22 +9,46 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  projectName = ProjectName;
+  projectImage = ProjectImage;
+  email: string = "";
+  password:string = "";
 
-  title = 'Blogy';
-  items: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
-  constructor(public fs: AngularFirestore) {
 
-    firestore().collection('items').onSnapshot(x => {
-      let data: any[] = [];
-      x.docs.forEach(element => {
-        data.push(element.data());
-      });
 
-      this.items.next(data);
+  constructor(
+    public afAuth: AngularFireAuth) {
 
-      });
+    
+    afAuth.user.subscribe(user=>{
 
+      if(user)
+      {
+        console.log(user.uid);
+        console.log(user.displayName);
+      }
+
+    });
   }
 
+
+  login() {
+    
+    this.afAuth.auth.signInWithEmailAndPassword(this.email,this.password)
+    .then(x=>{
+      console.log(x.user.uid);
+      console.log(x.user.displayName);
+    })
+    .catch(reson=>{
+      console.log(reson.message);
+    })
+  }
+
+
+  logout() {
+    this.email = "";
+    this.password = "";
+    this.afAuth.auth.signOut();
+  }
 
 }
