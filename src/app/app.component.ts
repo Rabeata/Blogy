@@ -11,43 +11,38 @@ import { ProjectName, ProjectImage } from './config/project.config';
 export class AppComponent {
   projectName = ProjectName;
   projectImage = ProjectImage;
-  email: string = "";
-  password:string = "";
+  email = '';
+  password = '';
 
 
 
   constructor(
     public afAuth: AngularFireAuth) {
+    afAuth.user.subscribe((user: firebase.User) => {
 
-    
-    afAuth.user.subscribe(user=>{
-
-      if(user)
-      {
+      if (user) {
         console.log(user.uid);
         console.log(user.displayName);
       }
-
     });
   }
 
 
   login() {
-    
-    this.afAuth.auth.signInWithEmailAndPassword(this.email,this.password)
-    .then(x=>{
+    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
+    .then(x => {
       console.log(x.user.uid);
       console.log(x.user.displayName);
     })
-    .catch(reson=>{
+    .catch(reson => {
       console.log(reson.message);
-    })
+    });
   }
 
 
   logout() {
-    this.email = "";
-    this.password = "";
+    this.email = '';
+    this.password = '';
     this.afAuth.auth.signOut();
   }
 
