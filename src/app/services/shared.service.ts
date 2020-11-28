@@ -1,7 +1,0 @@
-
-
-export class SharedService
-{ 
-    constructor(){}
-
-}

@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { PageComponent } from './page/page.component';
+import { APIService } from './services/api.service';
 
 
 @NgModule({
@@ -29,14 +30,14 @@ import { PageComponent } from './page/page.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    
+
     //Material
     MatButtonModule,
     MatInputModule,
     MatDividerModule
 
   ],
-  providers: [],
+  providers: [APIService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
