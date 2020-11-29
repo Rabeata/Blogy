@@ -14,6 +14,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { PageComponent } from './page/page.component';
 import { APIService } from './services/api.service';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 @NgModule({
@@ -34,7 +37,9 @@ import { APIService } from './services/api.service';
     //Material
     MatButtonModule,
     MatInputModule,
-    MatDividerModule
+    MatDividerModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
 
   ],
   providers: [APIService],

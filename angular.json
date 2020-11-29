@@ -125,6 +125,7 @@
   },
   "defaultProject": "Blogy",
   "cli": {
-    "analytics": "3100d00f-e7de-4ca0-a41e-2dc263687978"
+    "analytics": "3100d00f-e7de-4ca0-a41e-2dc263687978",
+    "defaultCollection": "@ngrx/schematics"
   }
 }
